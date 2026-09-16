@@ -18,14 +18,6 @@ pnpm install --frozen-lockfile
 pnpm check
 ```
 
-## Subtree consumers
+## Distribution
 
-Consumer projects mount this repository at `docs/engineering` and keep the remote explicit:
-
-```bash
-git remote add -f ai-rules https://github.com/NickVolkov/ai-architecture-rules.git
-git remote set-url --push ai-rules git@github.com:NickVolkov/ai-architecture-rules.git
-git subtree add --prefix=docs/engineering ai-rules main --squash
-```
-
-After the initial add, consumers use their `ai:pull` and `ai:push` package scripts. `ai:push` requires write access and is intended for maintainers.
+These guides are ordinary files in the Nest backend template. Consumer projects receive updates together with the rest of the template through `npx scaffoldrr update`.
