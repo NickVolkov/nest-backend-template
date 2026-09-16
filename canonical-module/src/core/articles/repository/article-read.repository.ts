@@ -1,4 +1,4 @@
-import { ArticleSummary } from '@/core/articles/dto/article-read.dto';
+import { ArticleSummary } from '@/core/articles/schemas/article-read.schema';
 import { ArticleStatus } from '@/core/articles/schemas/article.schema';
 
 export type FindArticlesPageInput = {

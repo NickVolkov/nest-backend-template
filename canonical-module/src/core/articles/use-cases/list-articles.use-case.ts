@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
-import { ArticleListResponseDto } from '@/core/articles/dto/article-read.dto';
 import { ArticleReadRepository } from '@/core/articles/repository/article-read.repository';
+import { ArticleListResponse } from '@/core/articles/schemas/article-read.schema';
 import { ArticleStatus } from '@/core/articles/schemas/article.schema';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class ListArticlesUseCase {
     page: number;
     limit: number;
     statuses?: ArticleStatus[];
-  }): Promise<ArticleListResponseDto> {
+  }): Promise<ArticleListResponse> {
     const { items, total } = await this.articles.findPage({
       offset: (input.page - 1) * input.limit,
       limit: input.limit,

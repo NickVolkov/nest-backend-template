@@ -2,7 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { ArticleSummary, ArticleSummaryProjection } from '@/core/articles/dto/article-read.dto';
+import {
+  ArticleSummary,
+  ArticleSummaryProjection,
+} from '@/core/articles/schemas/article-read.schema';
 import {
   ArticleReadRepository,
   ArticlesPage,
