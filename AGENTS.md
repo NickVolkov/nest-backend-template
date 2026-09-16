@@ -6,6 +6,9 @@ These repository instructions are authoritative. Apply the target architecture t
 
 - **Backend changes:** Before planning, writing, or reviewing NestJS modules, controllers, use cases, entities, repositories, adapters, configuration, migrations, or backend tests, read [`docs/engineering/backend-guidelines.md`](docs/engineering/backend-guidelines.md).
 - **Schema-first changes:** When a task touches a core schema, value object, entity, DTO, repository contract, read model, or persistence mapping, also read [`docs/engineering/schema-first.md`](docs/engineering/schema-first.md).
+- **CQRS queries:** When a query needs pagination, filtering, joins, aggregation, or a response shape different from the write aggregate, read [`docs/engineering/cqrs.md`](docs/engineering/cqrs.md).
+- **Events:** Before adding an event, queue, emitter, or fire-and-forget workflow, read [`docs/engineering/events.md`](docs/engineering/events.md).
+- **Design and review:** Use [`docs/engineering/anti-patterns.md`](docs/engineering/anti-patterns.md) to check boundary violations in new or modified code.
 - **Canonical module:** When adding a domain vertical slice, inspect [`docs/engineering/canonical-module`](docs/engineering/canonical-module/) and preserve its dependency direction and validation boundaries.
 
 ## Hard boundaries
