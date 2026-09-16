@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 export const ArticleStatusSchema = z.enum(['DRAFT', 'PUBLISHED']);
+export type ArticleStatus = z.output<typeof ArticleStatusSchema>;
 
 export const ArticleSchema = z.object({
   id: z.string().uuid(),

@@ -25,7 +25,7 @@ Use cases have one public `execute()` method and orchestrate the workflow: load 
 
 When a rule needs data outside an aggregate, the use case obtains the data and passes the resulting fact or value to an entity or provider-agnostic domain policy. Controllers contain transport concerns, not business workflows.
 
-Prefer direct use-case calls. Introduce events only when the emitting domain must remain unaware of every consumer, and define delivery, retry, and idempotency behavior at the same time.
+Prefer direct use-case calls. Introduce events only when the emitting domain must remain unaware of every consumer, and define delivery, retry, idempotency, and transaction behavior at the same time. Read [events.md](events.md) before introducing an event-driven path.
 
 See the canonical [Article entity](canonical-module/src/core/articles/entities/article.entity.ts), [use cases](canonical-module/src/core/articles/use-cases/), and [controller](canonical-module/src/primary-adapters/api/controllers/article.controller.ts).
 
@@ -33,12 +33,12 @@ See the canonical [Article entity](canonical-module/src/core/articles/entities/a
 
 - Declare repositories and external-service ports as provider-agnostic abstract classes in the owning core domain.
 - Put TypeORM entities and physical row shapes under `secondary-adapters/postgres/` and map them explicitly to schema-defined domain data.
-- Use separate read and write repositories when query projections differ materially from aggregates.
+- Use separate read and write repositories when query projections differ materially from aggregates. The write repository persists domain entities; the read repository maps storage rows directly into validated, DTO-ready projections. See [cqrs.md](cqrs.md).
 - Bind abstract ports to implementations in secondary-adapter modules. Compose infrastructure and core modules in a primary adapter.
 - Add one forward-only migration per database change. Treat every committed migration as immutable.
 - Integration-test migrations and row mappings against PostgreSQL with testcontainers when persistence behavior changes.
 
-See the canonical [repository contract](canonical-module/src/core/articles/repository/article.repository.ts), [TypeORM implementation](canonical-module/src/secondary-adapters/postgres/repository/article-in-postgres.repository.ts), and [migration](canonical-module/src/secondary-adapters/postgres/migrations/1700000000000-CreateArticles.ts).
+See the canonical write [repository contract](canonical-module/src/core/articles/repository/article.repository.ts), read [repository contract](canonical-module/src/core/articles/repository/article-read.repository.ts), [TypeORM implementations](canonical-module/src/secondary-adapters/postgres/repository/), and [migration](canonical-module/src/secondary-adapters/postgres/migrations/1700000000000-CreateArticles.ts).
 
 ## Modules and naming
 
@@ -91,3 +91,5 @@ For a new capability:
 7. Test domain behavior, orchestration, mappings, migrations, and the API contract in proportion to risk.
 
 Completion requires typecheck, focused tests, and broader integration tests for cross-layer changes.
+
+During implementation and review, check the concrete failure modes in [anti-patterns.md](anti-patterns.md).
