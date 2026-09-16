@@ -14,7 +14,7 @@ See [article.schema.ts](canonical-module/src/core/articles/schemas/article.schem
 
 Use `.pick()` or `.omit()` when field names, types, and meanings remain unchanged. Use `.extend()` to add fields, not to silently replace an existing field with another meaning.
 
-When an API serializes dates, renames or groups values, or adds computed fields, define the final output projection explicitly and reuse unchanged leaf schemas through `SourceSchema.shape.field`. DTO classes remain thin `createZodDto(Projection)` wrappers with no duplicate properties.
+When an API serializes dates, renames or groups values, or adds computed fields, define the final output projection explicitly under `schemas/` and reuse unchanged leaf schemas through `SourceSchema.shape.field`. DTO files remain thin `createZodDto(Projection)` wrappers with no schemas or duplicate properties.
 
 See [article.dto.ts](canonical-module/src/core/articles/dto/article.dto.ts).
 
