@@ -17,6 +17,10 @@ article.publish();
 
 `ArticleState`, `ArticleProps`, `ArticleRow`, and decorated DTO fields repeating the same structure create competing sources of truth. Define `ArticleSchema`, infer its data type, and derive unchanged projections with `pick` or `omit`.
 
+## Schemas declared in DTO files
+
+A DTO file containing `z.object`, `pick`, `omit`, `extend`, preprocessing, or inferred types becomes a second schema location and invites core code to depend on transport classes. Keep all schema construction and structural types under `schemas/`; make every DTO a thin `createZodDto(...)` wrapper.
+
 ## Infrastructure in core
 
 A core repository accepting a TypeORM `FindOptionsWhere`, Redis client, HTTP response, or provider SDK type couples policy to an adapter. Express the required operation as a provider-agnostic abstract class and map adapter types at the boundary.
