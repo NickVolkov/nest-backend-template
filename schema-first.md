@@ -42,6 +42,8 @@ See [article.entity.ts](canonical-module/src/core/articles/entities/article.enti
 
 Write repositories accept and return domain entities. Read repositories may return final schema-derived projections when recreating an aggregate adds no value.
 
+When a query has filtering, sorting, pagination, joins, or a response shape different from the aggregate, keep its final projection beside the DTO and let a dedicated read repository return that validated projection. Do not restore a write aggregate only to immediately flatten it for display. See [cqrs.md](cqrs.md) and the canonical [Article read repository](canonical-module/src/core/articles/repository/article-read.repository.ts).
+
 Keep database entities and row types in the persistence adapter. Map base units, dates, nullability, JSON, and provider identifiers explicitly. Validate mapped logical data before restoring an entity. Do not leak TypeORM types into core.
 
 Domain and database schemas serve different purposes. Change TypeORM models with a new forward-only migration and test the affected migration chain or mapping.
