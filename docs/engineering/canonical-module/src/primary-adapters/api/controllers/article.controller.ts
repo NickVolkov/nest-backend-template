@@ -11,12 +11,8 @@ import {
   ArticleAlreadyPublishedError,
   ArticleNotFoundError,
 } from '@/core/articles/articles.errors';
-import {
-  ArticleDto,
-  ArticleListQueryDto,
-  ArticleListResponseDto,
-  CreateArticleDto,
-} from '@/core/articles/dto/article.dto';
+import { ArticleListQueryDto, ArticleListResponseDto } from '@/core/articles/dto/article-read.dto';
+import { ArticleDto, CreateArticleDto } from '@/core/articles/dto/article.dto';
 import { CreateArticleUseCase } from '@/core/articles/use-cases/create-article.use-case';
 import { GetArticleUseCase } from '@/core/articles/use-cases/get-article.use-case';
 import { ListArticlesUseCase } from '@/core/articles/use-cases/list-articles.use-case';

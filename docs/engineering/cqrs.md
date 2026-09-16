@@ -43,7 +43,7 @@ export abstract class ArticleReadRepository {
 }
 ```
 
-`ArticleSummary` is inferred from `ArticleSummaryProjection`, which reuses canonical leaves from `ArticleSchema`. The projection is a core API/read contract, not a persistence row.
+`ArticleSummary` is inferred from [`ArticleSummaryProjection`](canonical-module/src/core/articles/dto/article-read.dto.ts), which reuses canonical leaves from `ArticleSchema`. The projection is a core API/read contract, not a persistence row.
 
 ## Read adapter
 
