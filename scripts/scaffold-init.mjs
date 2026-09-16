@@ -3,12 +3,6 @@ import { basename, join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 const root = process.cwd();
-const configuredRulesRemote = process.env.AI_RULES_REMOTE;
-const rulesRemote =
-  configuredRulesRemote ?? 'https://github.com/NickVolkov/ai-architecture-rules.git';
-const rulesPushRemote =
-  process.env.AI_RULES_PUSH_REMOTE ??
-  (configuredRulesRemote ? rulesRemote : 'git@github.com:NickVolkov/ai-architecture-rules.git');
 const skipApmInstall = process.env.SCAFFOLD_SKIP_APM === '1';
 
 function fail(message) {
@@ -75,15 +69,12 @@ for (const requiredFile of ['package.json', 'apm.yml', 'docs/engineering']) {
 
 if (isInsideGitWorktree()) {
   fail(
-    'the project is already inside a Git worktree; run scaffold:init immediately after Degit and before git init',
+    'the project is already inside a Git worktree; run scaffold:init immediately after scaffoldrr creates the files and before git init',
   );
 }
 
 execute('git', ['config', 'user.name'], { capture: true });
 execute('git', ['config', 'user.email'], { capture: true });
-execute('git', ['ls-remote', '--exit-code', rulesRemote, 'refs/heads/main'], {
-  capture: true,
-});
 
 normalizeProjectName();
 rmSync(join(root, 'CLAUDE.md'), { force: true });
@@ -93,14 +84,8 @@ if (!skipApmInstall) {
   execute('apm', ['install']);
 }
 
-rmSync(join(root, 'docs/engineering'), { recursive: true });
-
 execute('git', ['init', '--initial-branch=main']);
-execute('git', ['remote', 'add', 'ai-rules', rulesRemote]);
-execute('git', ['remote', 'set-url', '--push', 'ai-rules', rulesPushRemote]);
-execute('git', ['fetch', 'ai-rules', 'main']);
 execute('git', ['add', '--all']);
 execute('git', ['commit', '-m', 'Initialize project from Nest backend template']);
-execute('git', ['subtree', 'add', '--prefix=docs/engineering', 'ai-rules', 'main', '--squash']);
 
 console.log('\nProject initialized. Next: pnpm install');

@@ -13,7 +13,7 @@ npx scaffoldrr create NickVolkov/nest-backend-template my-backend
 cd my-backend
 ```
 
-The command installs dependencies and shared APM skills, initializes a new Git repository, and replaces the documentation snapshot with an updateable `docs/engineering` Git subtree.
+The command installs dependencies and shared APM skills and initializes a new Git repository. Architecture guidance in `docs/engineering` is versioned with the rest of the template.
 
 Clone the repository only when contributing to the template itself:
 
@@ -47,15 +47,8 @@ The health endpoint is `GET /api/health`; Swagger UI is available at `/docs`.
 
 ## Architecture rules
 
-The shared rules are vendored into `docs/engineering` with Git subtree.
-
-```bash
-pnpm ai:init # once after cloning
-pnpm ai:pull
-pnpm ai:push # maintainers with write access only
-```
-
-`scaffold:init` adds the `ai-rules` remote automatically. `ai:init` is available for existing repositories that need to attach the remote manually and intentionally fails when the remote already exists.
+The shared rules live in `docs/engineering` and are updated together with the
+rest of the template by `npx scaffoldrr update`.
 
 ## Verification
 

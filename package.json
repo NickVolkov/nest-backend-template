@@ -20,10 +20,7 @@
     "scaffold:init": "node scripts/scaffold-init.mjs",
     "scaffold:status": "npx scaffoldrr status",
     "scaffold:update": "npx scaffoldrr update",
-    "scaffold:update:check": "npx scaffoldrr update --dry-run",
-    "ai:init": "git remote add -f ai-rules https://github.com/NickVolkov/ai-architecture-rules.git && git remote set-url --push ai-rules git@github.com:NickVolkov/ai-architecture-rules.git",
-    "ai:pull": "git subtree pull --prefix=docs/engineering ai-rules main --squash",
-    "ai:push": "git subtree push --prefix=docs/engineering ai-rules main"
+    "scaffold:update:check": "npx scaffoldrr update --dry-run"
   },
   "engines": {
     "node": ">=22.0.0"
