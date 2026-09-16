@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { ArticleListResponseDto } from '@/core/articles/dto/article.dto';
+import { ArticleListResponseDto } from '@/core/articles/dto/article-read.dto';
 import { ArticleReadRepository } from '@/core/articles/repository/article-read.repository';
 import { ArticleStatus } from '@/core/articles/schemas/article.schema';
 
