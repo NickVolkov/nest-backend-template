@@ -12,11 +12,19 @@ See [article.schema.ts](canonical-module/src/core/articles/schemas/article.schem
 
 ## Projections and DTOs
 
+All Zod schemas, projections, schema composition, and schema-derived structural types live under `core/<domain>/schemas/*.schema.ts`.
+
 Use `.pick()` or `.omit()` when field names, types, and meanings remain unchanged. Use `.extend()` to add fields, not to silently replace an existing field with another meaning.
 
-When an API serializes dates, renames or groups values, or adds computed fields, define the final output projection explicitly under `schemas/` and reuse unchanged leaf schemas through `SourceSchema.shape.field`. DTO files remain thin `createZodDto(Projection)` wrappers with no schemas or duplicate properties.
+When an API serializes dates, renames or groups values, or adds computed fields, define the final output projection explicitly under `schemas/` and reuse unchanged leaf schemas through `SourceSchema.shape.field`.
 
-See [article.dto.ts](canonical-module/src/core/articles/dto/article.dto.ts).
+Files under `core/<domain>/dto/` are transport wrappers only. They import schemas and declare classes extending `createZodDto(Schema)`. They contain no `z.*` declarations, `.pick()`, `.omit()`, `.extend()`, preprocessing, inferred types, or other schema composition.
+
+Repositories and use cases import structural types and runtime schemas from `schemas/`, never from `dto/`. DTO classes are consumed at transport boundaries and may be used as entity `toDto()` return types.
+
+For CQRS, keep the write aggregate in `<entity>.schema.ts`, query inputs and read projections in `<entity>-read.schema.ts`, and only their NestJS wrappers in `<entity>-read.dto.ts`.
+
+See the canonical [write schema](canonical-module/src/core/articles/schemas/article.schema.ts), [read schema](canonical-module/src/core/articles/schemas/article-read.schema.ts), [output schema](canonical-module/src/core/articles/schemas/article-output.schema.ts), and thin [DTO wrappers](canonical-module/src/core/articles/dto/).
 
 ## Validation boundaries
 
@@ -42,7 +50,7 @@ See [article.entity.ts](canonical-module/src/core/articles/entities/article.enti
 
 Write repositories accept and return domain entities. Read repositories may return final schema-derived projections when recreating an aggregate adds no value.
 
-When a query has filtering, sorting, pagination, joins, or a response shape different from the aggregate, keep its final projection beside the DTO and let a dedicated read repository return that validated projection. Do not restore a write aggregate only to immediately flatten it for display. See [cqrs.md](cqrs.md) and the canonical [Article read repository](canonical-module/src/core/articles/repository/article-read.repository.ts).
+When a query has filtering, sorting, pagination, joins, or a response shape different from the aggregate, keep its final projection in a read schema and let a dedicated read repository return that validated projection. Do not restore a write aggregate only to immediately flatten it for display. See [cqrs.md](cqrs.md) and the canonical [Article read repository](canonical-module/src/core/articles/repository/article-read.repository.ts).
 
 Keep database entities and row types in the persistence adapter. Map base units, dates, nullability, JSON, and provider identifiers explicitly. Validate mapped logical data before restoring an entity. Do not leak TypeORM types into core.
 
@@ -51,6 +59,9 @@ Domain and database schemas serve different purposes. Change TypeORM models with
 ## Change checklist
 
 - Every modified core structure has one canonical schema.
+- Every `z.*` declaration and schema composition lives under `schemas/`.
+- DTO files contain only imports and `createZodDto(...)` classes.
+- Repositories and use cases import no DTO classes; read repositories return types inferred from read schemas.
 - Types, projections, DTOs, and repository contracts derive from it.
 - Parsing occurs at trust boundaries instead of throughout the call chain.
 - Aggregate invariants live in entities or value objects.

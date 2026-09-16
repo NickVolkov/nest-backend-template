@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "architecture:check": "node scripts/check-architecture.mjs",
     "canonical:check": "pnpm --dir canonical-module check",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check": "pnpm format:check && pnpm canonical:check"
+    "check": "pnpm format:check && pnpm architecture:check && pnpm canonical:check"
   },
   "packageManager": "pnpm@9.15.0",
   "devDependencies": {
