@@ -1,6 +1,9 @@
 {
   "schemaVersion": 1,
-  "afterCreate": ["node scripts/scaffold-init.mjs", "pnpm install"],
+  "symlinks": {
+    "CLAUDE.md": "AGENTS.md"
+  },
+  "afterCreate": ["apm install", "pnpm install"],
   "afterUpdate": [
     "pnpm install",
     "pnpm format:check",
