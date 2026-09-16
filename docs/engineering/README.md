@@ -23,7 +23,7 @@ pnpm check
 Consumer projects mount this repository at `docs/engineering` and keep the remote explicit:
 
 ```bash
-git remote add -f ai-rules git@github.com:your-user/ai-architecture-rules.git
+git remote add -f ai-rules git@github.com:NickVolkov/ai-architecture-rules.git
 git subtree add --prefix=docs/engineering ai-rules main --squash
 ```
 
