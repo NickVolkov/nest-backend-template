@@ -1,0 +1,11 @@
+module.exports = {
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+  },
+  rootDir: '..',
+  testEnvironment: 'node',
+  testRegex: 'test/.*\\.e2e-spec\\.ts$',
+  transform: {
+    '^.+\\.ts$': ['ts-jest', { tsconfig: 'tsconfig.json' }],
+  },
+};

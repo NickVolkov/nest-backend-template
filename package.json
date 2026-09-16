@@ -1,0 +1,60 @@
+{
+  "name": "nest-backend-template",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "nest build",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:prod": "node dist/main.js",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "jest --config jest.config.cjs --runInBand",
+    "test:e2e": "jest --config test/jest-e2e.config.cjs --runInBand",
+    "test:integration": "jest --config test/jest-integration.config.cjs --runInBand",
+    "openapi:generate": "node -r ts-node/register -r tsconfig-paths/register src/primary-adapters/api/generate-openapi.ts",
+    "db:migration:generate": "typeorm-ts-node-commonjs -d src/secondary-adapters/postgres/data-source.ts migration:generate",
+    "db:migration:run": "node -r ts-node/register -r tsconfig-paths/register ./node_modules/typeorm/cli.js -d src/secondary-adapters/postgres/data-source.ts migration:run",
+    "db:migration:revert": "node -r ts-node/register -r tsconfig-paths/register ./node_modules/typeorm/cli.js -d src/secondary-adapters/postgres/data-source.ts migration:revert",
+    "ai:init": "git remote add -f ai-rules git@github.com:your-user/ai-architecture-rules.git",
+    "ai:pull": "git subtree pull --prefix=docs/engineering ai-rules main --squash",
+    "ai:push": "git subtree push --prefix=docs/engineering ai-rules main"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "dependencies": {
+    "@fastify/helmet": "13.0.2",
+    "@nestjs/common": "11.1.6",
+    "@nestjs/core": "11.1.6",
+    "@nestjs/platform-fastify": "11.1.6",
+    "@nestjs/swagger": "11.2.0",
+    "@nestjs/typeorm": "11.0.0",
+    "dotenv": "17.2.3",
+    "js-yaml": "4.1.0",
+    "nestjs-pino": "4.4.1",
+    "nestjs-zod": "5.0.1",
+    "pg": "8.16.3",
+    "pino": "9.11.0",
+    "reflect-metadata": "0.2.2",
+    "rxjs": "7.8.2",
+    "typeorm": "0.3.27",
+    "zod": "4.1.12"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "11.0.10",
+    "@nestjs/testing": "11.1.6",
+    "@testcontainers/postgresql": "11.7.2",
+    "@types/jest": "29.5.14",
+    "@types/js-yaml": "4.0.9",
+    "@types/node": "22.18.0",
+    "jest": "29.7.0",
+    "prettier": "3.9.0",
+    "ts-jest": "29.4.1",
+    "ts-node": "10.9.2",
+    "tsconfig-paths": "4.2.0",
+    "typescript": "5.9.2"
+  }
+}

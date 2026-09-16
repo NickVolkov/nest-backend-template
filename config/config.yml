@@ -1,0 +1,13 @@
+app:
+  name: nest-backend
+  node_env: development
+
+apps:
+  api:
+    port: 8000
+    host: http://localhost:8000
+
+database:
+  url: postgresql://app:app@localhost:5432/app
+  log: false
+  run_migrations: false
