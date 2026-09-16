@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "afterCreate": ["node scripts/scaffold-init.mjs", "pnpm install"],
+  "afterUpdate": [
+    "pnpm install",
+    "pnpm format:check",
+    "pnpm typecheck",
+    "pnpm test",
+    "pnpm test:e2e",
+    "pnpm build"
+  ]
+}
