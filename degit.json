@@ -1,0 +1,12 @@
+[
+  {
+    "action": "search_replace",
+    "files": ["package.json", "apm.yml"],
+    "pattern": "nest-backend-template",
+    "replacement": "PROJECT_NAME"
+  },
+  {
+    "action": "remove",
+    "files": ["degit.json"]
+  }
+]

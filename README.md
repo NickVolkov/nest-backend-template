@@ -4,19 +4,23 @@ Runnable foundation for an opinionated NestJS backend using Fastify, Zod, TypeOR
 
 ## Create a project
 
-Clone with history when you want centrally updateable architecture rules:
+Prerequisites: Node.js 22+, pnpm, Git, and the `apm` CLI must be available on `PATH`. Configure `user.name` and `user.email` in Git before bootstrapping.
+
+Create a project with Degit. The required `PROJECT_NAME` environment variable sets the package and APM project names:
 
 ```bash
-git clone https://github.com/your-user/nest-backend-template.git my-backend
+PROJECT_NAME=my-backend npx degit NickVolkov/nest-backend-template my-backend
 cd my-backend
-pnpm ai:init
+pnpm scaffold:init
 pnpm install
 ```
 
-A Degit copy contains the current documentation snapshot but not the Git history required by `git subtree pull`:
+`scaffold:init` must run before `git init`. It installs the shared APM skills, initializes a new Git repository, and replaces the documentation snapshot with an updateable `docs/engineering` Git subtree.
+
+Clone the repository only when contributing to the template itself:
 
 ```bash
-degit your-user/nest-backend-template my-backend
+git clone https://github.com/NickVolkov/nest-backend-template.git
 ```
 
 ## Run locally
@@ -41,7 +45,7 @@ pnpm ai:pull
 pnpm ai:push # maintainers with write access only
 ```
 
-`ai:init` intentionally fails if the `ai-rules` remote already exists. Projects created with Degit receive a static documentation snapshot; attaching it as an updateable subtree is a separate manual migration.
+`scaffold:init` adds the `ai-rules` remote automatically. `ai:init` is available for existing repositories that need to attach the remote manually and intentionally fails when the remote already exists.
 
 ## Verification
 
