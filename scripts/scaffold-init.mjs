@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { basename, join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
@@ -86,6 +86,8 @@ execute('git', ['ls-remote', '--exit-code', rulesRemote, 'refs/heads/main'], {
 });
 
 normalizeProjectName();
+rmSync(join(root, 'CLAUDE.md'), { force: true });
+symlinkSync('AGENTS.md', join(root, 'CLAUDE.md'));
 
 if (!skipApmInstall) {
   execute('apm', ['install']);
