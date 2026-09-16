@@ -3,8 +3,12 @@ import { basename, join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 const root = process.cwd();
+const configuredRulesRemote = process.env.AI_RULES_REMOTE;
 const rulesRemote =
-  process.env.AI_RULES_REMOTE ?? 'git@github.com:NickVolkov/ai-architecture-rules.git';
+  configuredRulesRemote ?? 'https://github.com/NickVolkov/ai-architecture-rules.git';
+const rulesPushRemote =
+  process.env.AI_RULES_PUSH_REMOTE ??
+  (configuredRulesRemote ? rulesRemote : 'git@github.com:NickVolkov/ai-architecture-rules.git');
 const skipApmInstall = process.env.SCAFFOLD_SKIP_APM === '1';
 
 function fail(message) {
@@ -91,6 +95,7 @@ rmSync(join(root, 'docs/engineering'), { recursive: true });
 
 execute('git', ['init', '--initial-branch=main']);
 execute('git', ['remote', 'add', 'ai-rules', rulesRemote]);
+execute('git', ['remote', 'set-url', '--push', 'ai-rules', rulesPushRemote]);
 execute('git', ['fetch', 'ai-rules', 'main']);
 execute('git', ['add', '--all']);
 execute('git', ['commit', '-m', 'Initialize project from Nest backend template']);
