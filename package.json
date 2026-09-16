@@ -1,0 +1,15 @@
+{
+  "name": "ai-architecture-rules",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "canonical:check": "pnpm --dir canonical-module check",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "pnpm format:check && pnpm canonical:check"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "devDependencies": {
+    "prettier": "3.9.0"
+  }
+}
