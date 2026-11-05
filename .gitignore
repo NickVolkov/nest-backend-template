@@ -6,3 +6,11 @@ coverage
 .env.local
 .env.*.local
 .DS_Store
+
+# APM dependencies
+apm_modules/
+.agents/
+.claude/skills/
+.codex/skills/
+.codex/config.toml
+.mcp.json

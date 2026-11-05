@@ -4,7 +4,7 @@ Runnable foundation for an opinionated NestJS backend using Fastify, Zod, TypeOR
 
 ## Create a project
 
-Prerequisites: Node.js 22+, pnpm, Git, and the `apm` CLI must be available on `PATH`. Configure `user.name` and `user.email` in Git before bootstrapping.
+Prerequisites: Node.js 22+, pnpm, Git, and [mise](https://mise.jdx.dev/) must be available on `PATH`. Configure `user.name` and `user.email` in Git before bootstrapping. The template uses mise to install and run its pinned APM version.
 
 Create and initialize a project with `scaffoldrr`:
 

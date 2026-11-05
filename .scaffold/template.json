@@ -3,8 +3,10 @@
   "symlinks": {
     "CLAUDE.md": "AGENTS.md"
   },
-  "afterCreate": ["apm install", "pnpm install"],
+  "afterCreate": ["mise install", "mise exec -- apm install --frozen", "pnpm install"],
   "afterUpdate": [
+    "mise install",
+    "mise exec -- apm install --frozen",
     "pnpm install",
     "pnpm format:check",
     "pnpm typecheck",
