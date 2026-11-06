@@ -6,12 +6,10 @@ author: Nick Volkov
 # Resolution order: --target flag > this field > auto-detect from filesystem.
 # Accepted values: agent-skills, antigravity, claude, codex, copilot, cursor, gemini, grok-build, hermes, kiro, opencode, vscode, windsurf
 targets:
-  - agent-skills
-  - claude
-  - codex
+  - opencode
 dependencies:
   apm:
-    - yo-finance/yo-ai#v0.2.1
+    - yo-finance/yo-ai#v0.2.4
   mcp: []
 includes: auto
 scripts: {}
