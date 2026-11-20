@@ -9,7 +9,7 @@ targets:
   - opencode
 dependencies:
   apm:
-    - yo-finance/yo-ai#v0.2.6
+    - yo-finance/yo-ai
   mcp: []
 includes: auto
 scripts: {}
